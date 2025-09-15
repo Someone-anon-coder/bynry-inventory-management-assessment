@@ -39,6 +39,10 @@ class Inventory(db.Model):
 
 
 # --- Refactored API Endpoint ---
+@app.route('/')
+def home():
+    return '<h1>Welcome to the Bynry Inventory Management API</h1>', 200
+
 @app.route('/product', methods=['POST'])
 def create_product():
     """

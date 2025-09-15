@@ -3,6 +3,8 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 
+from src.alerts import alerts_bp
+
 # --- Boilerplate Setup ---
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///:memory:')
@@ -113,6 +115,7 @@ def create_product():
         # Log the exception e in a real application
         return jsonify({"error": "An unexpected error occurred."}), 500
 
+app.register_blueprint(alerts_bp)
 
 if __name__ == '__main__':
     with app.app_context():
